@@ -1,0 +1,29 @@
+.todo{
+    margin: 0 10px;
+    border: black 1px solid;
+    width: 400px;
+}
+
+.header{
+    font-size: 30px;
+}
+
+.todoItem{
+    font-size: 20px;
+    text-align: center;
+    border: #686767 1px solid;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.todoItem span{
+    margin: 0 10px;
+}
+
+.add{
+    width: 600px;
+    padding: 5px;
+    font-size: 20px;
+}
