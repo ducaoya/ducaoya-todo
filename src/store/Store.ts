@@ -1,19 +1,21 @@
-import { makeAutoObservable } from "mobx";
+import { action, computed, makeAutoObservable } from "mobx";
 import { del, get, post, put } from "../ts/request";
 
 class Store {
   todoList: Todo[] = [];
   doingList: Todo[] = [];
   doneList: Todo[] = [];
-  url: string = "http://localhost:5050/list";
+  url: string = "http://10.227.3.20:5050/list";
   event: string = "";
 
+  @computed
   change(value: string) {
     this.event = value;
     this.add();
   }
 
   //更新数据数据
+  @action.bound
   setData() {
     let res = get(this.url);
     res.then((data) => {
@@ -34,7 +36,8 @@ class Store {
   }
 
   //右移
-  right(item: Todo) {
+  @computed
+  async right(item: Todo) {
     let upData = {
       id: item.id,
       event: item.event,
@@ -42,14 +45,15 @@ class Store {
     };
     let data = JSON.stringify(upData);
     let newUrl = `${this.url}/${item.id}`;
-    put(newUrl, data).then((res) => {
+    await put(newUrl, data).then((res) => {
       console.log(res);
     });
     this.setData();
   }
 
   //左移
-  left(item: Todo) {
+  @computed
+  async left(item: Todo) {
     let upData = {
       id: item.id,
       event: item.event,
@@ -57,30 +61,32 @@ class Store {
     };
     let data = JSON.stringify(upData);
     let newUrl = `${this.url}/${item.id}`;
-    put(newUrl, data).then((res) => {
+    await put(newUrl, data).then((res) => {
       console.log(res);
     });
     this.setData();
   }
 
   //delet
-  del(item: Todo) {
+  @computed
+  async del(item: Todo) {
     let newUrl = `${this.url}/${item.id}`;
-    del(newUrl).then((r) => {
+    await del(newUrl).then((r) => {
       console.log(r);
     });
     this.setData();
   }
 
   //添加
-  add() {
+  @computed
+  async add() {
     let obj = {
       id: Math.floor(new Date().getTime() * 10000),
       event: this.event,
       status: 0,
     };
     let data = JSON.stringify(obj);
-    post(this.url, data).then((r) => {
+    await post(this.url, data).then((r) => {
       console.log(r);
     });
     this.setData();

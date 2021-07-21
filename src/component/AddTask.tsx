@@ -18,9 +18,9 @@ export class AddTask extends React.Component<any, State>{
         }
     }
     // @ts-ignore
-    submite(event) {
+    submite() {
         store.change(this.state.value)
-        event.preventDefault();
+
     }
 
     // @ts-ignore
@@ -31,7 +31,7 @@ export class AddTask extends React.Component<any, State>{
     }
     render() {
         return (
-            <form className="add" onSubmit={e => { this.submite(e) }}>
+            <form className="add" onSubmit={() => { this.submite() }}>
                 <input className="add" value={this.state.value} onChange={e => (this.change(e))} placeholder="添加事项" />
             </form>
         )
