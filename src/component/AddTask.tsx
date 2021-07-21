@@ -20,7 +20,10 @@ export class AddTask extends React.Component<any, State>{
     // @ts-ignore
     submite(event) {
         store.change(this.state.value)
-		event.preventDefault()
+        this.setState({
+            value: ""
+        })
+        event.preventDefault()
     }
 
     // @ts-ignore
