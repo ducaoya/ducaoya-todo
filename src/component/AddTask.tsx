@@ -1,8 +1,8 @@
 import React from "react";
 import store from "../store/Store"
 import { observer } from 'mobx-react'
-import "./style.css"
 import "antd/dist/antd.css";
+import { Col, Input, Row } from "antd";
 
 interface State {
     value: string
@@ -18,7 +18,7 @@ export class AddTask extends React.Component<any, State>{
         }
     }
     // @ts-ignore
-    submite(event) {
+    submit(event) {
         store.change(this.state.value)
         this.setState({
             value: ""
@@ -34,9 +34,21 @@ export class AddTask extends React.Component<any, State>{
     }
     render() {
         return (
-            <form className="add" onSubmit={(e) => { this.submite(e) }}>
-                <input className="add" value={this.state.value} onChange={e => (this.change(e))} placeholder="添加事项" />
-            </form>
+            <Row style={{ width: "100%", justifyContent: "center" }}>
+                <Col span={16}>
+                <Input
+                    placeholder="添加待办事项"
+                    allowClear
+                    size="large"
+                    value={this.state.value}
+                    onChange={(event) => this.change(event)}
+                    onPressEnter={(event) => this.submit(event)}
+                />
+                </Col>
+            </Row>
+            // <form className="add" onSubmit={(e) => { this.submite(e) }}>
+            //     <input className="add" value={this.state.value} onChange={e => (this.change(e))} placeholder="添加事项" />
+            // </form>
         )
     }
 }
