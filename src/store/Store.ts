@@ -67,7 +67,7 @@ class Store {
     this.setData();
   }
 
-  //delet
+  //delete
   @computed
   async del(item: Todo) {
     let newUrl = `${this.url}/${item.id}`;

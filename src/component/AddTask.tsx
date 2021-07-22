@@ -46,9 +46,6 @@ export class AddTask extends React.Component<any, State>{
                 />
                 </Col>
             </Row>
-            // <form className="add" onSubmit={(e) => { this.submite(e) }}>
-            //     <input className="add" value={this.state.value} onChange={e => (this.change(e))} placeholder="添加事项" />
-            // </form>
         )
     }
 }
