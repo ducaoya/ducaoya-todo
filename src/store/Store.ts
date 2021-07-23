@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { action, computed, makeAutoObservable } from "mobx";
 import { del, get, post, put } from "../ts/request";
 
@@ -9,9 +10,13 @@ class Store {
   event: string = "";
 
   @computed
-  change(value: string) {
-    this.event = value;
-    this.add();
+  change(value: string,name:string) {
+    this.event = `${name}：${value}`;
+    if(value===''||name===''){
+      message.error("姓名或者事项不能空！")
+    }else{
+      this.add();
+    } 
   }
 
   //更新数据数据
@@ -73,6 +78,8 @@ class Store {
   //delete
   @computed
   async del(item: Todo) {
+    console.log(1111);
+    
     let newUrl = `${this.url}/${item.id}`;
     await del(newUrl).then((r) => {
       console.log(r);
