@@ -1,13 +1,22 @@
 async function request<T>(method: string, url: string, data: string) {
   // @ts-ignore
   // @ts-ignore
-  let res = await fetch(url, {
-    method: method,
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: data,
-  });
+  // let res = await fetch(url, {
+  //   method: method,
+  //   body: data,
+  // });
+  // let json: T = await res.json();
+  // return json;
+  let option: RequestInit = {
+    method,
+  };
+  if (data) {
+    option.headers = {
+      "Content-Type": "application/json; charset=utf-8",
+    };
+    option.body = data;
+  }
+  let res = await fetch(url, option);
   let json: T = await res.json();
   return json;
 }

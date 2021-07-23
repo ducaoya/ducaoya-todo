@@ -1,22 +1,27 @@
 import { message } from "antd";
 import { action, computed, makeAutoObservable } from "mobx";
 import { del, get, post, put } from "../ts/request";
+import { configure } from "mobx";
+
+configure({
+  enforceActions: "never",
+});
 
 class Store {
   todoList: Todo[] = [];
   doingList: Todo[] = [];
   doneList: Todo[] = [];
-  url: string = "http://10.227.3.20:5050/list";
+  url: string = "http://192.168.123.189:5050/list";
   event: string = "";
 
   @computed
-  change(value: string,name:string) {
+  change(value: string, name: string) {
     this.event = `${name}：${value}`;
-    if(value===''||name===''){
-      message.error("姓名或者事项不能空！")
-    }else{
+    if (value === "" || name === "") {
+      message.error("姓名或者事项不能空！");
+    } else {
       this.add();
-    } 
+    }
   }
 
   //更新数据数据
@@ -37,9 +42,9 @@ class Store {
           this.doneList.push(item);
         }
       });
-      this.todoList.sort((first,second)=>second.id-first.id)
-      this.doingList.sort((first,second)=>second.id-first.id)
-      this.doneList.sort((first,second)=>second.id-first.id)
+      this.todoList.sort((first, second) => second.id - first.id);
+      this.doingList.sort((first, second) => second.id - first.id);
+      this.doneList.sort((first, second) => second.id - first.id);
     });
   }
 
@@ -77,10 +82,8 @@ class Store {
 
   //delete
   @computed
-  async del(item: Todo) {
-    console.log(1111);
-    
-    let newUrl = `${this.url}/${item.id}`;
+  async del(id: number) {
+    let newUrl = `${this.url}/${id}`;
     await del(newUrl).then((r) => {
       console.log(r);
     });
@@ -91,7 +94,7 @@ class Store {
   @computed
   async add() {
     let obj = {
-      id: Math.floor(new Date().getTime() * 10000),
+      id: new Date().getTime(),
       event: this.event,
       status: 0,
     };
