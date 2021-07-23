@@ -5,7 +5,7 @@ class Store {
   todoList: Todo[] = [];
   doingList: Todo[] = [];
   doneList: Todo[] = [];
-  url: string = "http://192.168.123.189:5050/list";
+  url: string = "http://10.227.3.20:5050/list";
   event: string = "";
 
   @computed
@@ -32,6 +32,9 @@ class Store {
           this.doneList.push(item);
         }
       });
+      this.todoList.sort((first,second)=>second.id-first.id)
+      this.doingList.sort((first,second)=>second.id-first.id)
+      this.doneList.sort((first,second)=>second.id-first.id)
     });
   }
 
