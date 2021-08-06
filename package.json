@@ -24,8 +24,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "json-server --port 5050 --watch db.json && react-scripts start",
-    "heroku-postbuild": "npm install && npm run start",
+    "start": "react-scripts start",
+    "heroku-postbuild": "npm install && npm run server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
