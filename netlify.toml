@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/list/*"
-  to = "https://ducaoya-todo.herokuapp.com/list/"
+  to = "https://ducaoya-todo.herokuapp.com/list/:splat"
   status = 200
 
 [[redirects]]
