@@ -99,9 +99,7 @@ class Store {
       status: 0,
     };
     let data = JSON.stringify(obj);
-    await post(this.url, data).then((r) => {
-      console.log(r);
-    });
+    await post(this.url, data);
     this.setData();
   }
 
