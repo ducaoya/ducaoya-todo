@@ -11,7 +11,7 @@ class Store {
   todoList: Todo[] = [];
   doingList: Todo[] = [];
   doneList: Todo[] = [];
-  url: string = "/list";
+  url: string = "http://127.0.0.1:3000/list";
   event: string = "";
 
   @computed
@@ -26,26 +26,23 @@ class Store {
 
   //更新数据数据
   @action.bound
-  setData() {
-    let res = get(this.url);
-    res.then((data) => {
-      this.todoList = [];
-      this.doingList = [];
-      this.doneList = [];
-      // @ts-ignore
-      data.forEach((item: Todo) => {
-        if (item.status === 0) {
-          this.todoList.push(item);
-        } else if (item.status === 1) {
-          this.doingList.push(item);
-        } else if (item.status === 2) {
-          this.doneList.push(item);
-        }
-      });
-      this.todoList.sort((first, second) => second.id - first.id);
-      this.doingList.sort((first, second) => second.id - first.id);
-      this.doneList.sort((first, second) => second.id - first.id);
+  async setData() {
+    let res: Todo[] = await get(this.url);
+    this.todoList = [];
+    this.doingList = [];
+    this.doneList = [];
+    res.forEach((item: Todo) => {
+      if (item.status === 0) {
+        this.todoList.push(item);
+      } else if (item.status === 1) {
+        this.doingList.push(item);
+      } else if (item.status === 2) {
+        this.doneList.push(item);
+      }
     });
+    this.todoList.sort((first, second) => second.id - first.id);
+    this.doingList.sort((first, second) => second.id - first.id);
+    this.doneList.sort((first, second) => second.id - first.id);
   }
 
   //右移
@@ -58,9 +55,7 @@ class Store {
     };
     let data = JSON.stringify(upData);
     let newUrl = `${this.url}/${item.id}`;
-    await put(newUrl, data).then((res) => {
-      console.log(res);
-    });
+    await put(newUrl, data);
     this.setData();
   }
 

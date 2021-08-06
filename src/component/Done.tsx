@@ -14,7 +14,9 @@ export class Done extends React.Component<any, any> {
           {store.doneList.length === 0 ? (
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
           ) : (
-            store.doneList.map((item) => <DoneItem item={item}></DoneItem>)
+            store.doneList.map((item) => (
+              <DoneItem key={item.id} item={item}></DoneItem>
+            ))
           )}
         </List>
       </div>
