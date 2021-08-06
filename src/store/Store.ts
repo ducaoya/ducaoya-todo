@@ -11,7 +11,7 @@ class Store {
   todoList: Todo[] = [];
   doingList: Todo[] = [];
   doneList: Todo[] = [];
-  url: string = "http://192.168.123.189:5050/list";
+  url: string = "http://127.0.0.1:5050/list";
   event: string = "";
 
   @computed
