@@ -35,3 +35,6 @@ package.json
 3. 设置局域网内需要调整 Store.ts 中的 url 和 package.json 中的"server": "json-server --port 5050 --watch -H 10.227.3.20 db.json"
 
 ### 测试提交中添加 emoji
+
+1. win+.添加 windows 自带 emoji
+2. vscode 可安装 Git Emoji Commit 中文版插件
