@@ -33,3 +33,5 @@ package.json
 1. 数据请求存在于 json-server,所以请启动 json-server
 2. 可在局域网内访问
 3. 设置局域网内需要调整 Store.ts 中的 url 和 package.json 中的"server": "json-server --port 5050 --watch -H 10.227.3.20 db.json"
+
+### 测试提交中添加 emoji
